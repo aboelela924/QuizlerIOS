@@ -53,10 +53,10 @@ class ViewController: UIViewController {
     
     func checkAnswer(userAnswer: Bool) {
         if(questions.list[questionIndex].answer == userAnswer){
-            showAlert(resultMessage: "You got it!")
+            ProgressHUD.showSuccess("You got it!")
             score+=1
         }else{
-            showAlert(resultMessage: "Wrong Answer")
+            ProgressHUD.showError("Wrong Answer")
         }
         if questionIndex == questions.list.count-1 	{
             startOver()
@@ -68,13 +68,14 @@ class ViewController: UIViewController {
     
     func startOver() {
        questionIndex = 0
+        showAlert()
         dispQuestion(questionIndex: questionIndex)
     }
     
-    func showAlert(resultMessage : String){
-        let alertController = UIAlertController(title: "Result", message: resultMessage, preferredStyle: .alert)
+    func showAlert(){
+        let alertController = UIAlertController(title: "Finished", message: "You have finished all the questions. Congratulations!", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "ok", style: .default) { (UIAlertAction) in
+        let action = UIAlertAction(title: "Restart", style: .default) { (UIAlertAction) in
             alertController.dismiss(animated: true, completion: nil)
         }
         alertController.addAction(action)
